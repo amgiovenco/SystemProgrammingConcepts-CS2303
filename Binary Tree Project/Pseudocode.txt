@@ -1,0 +1,106 @@
+function main(argc, argv)
+    if argc < 2 then
+        print "Usage: <program_name> input_file1 input_file2 ... etc"
+        return 1
+    end if
+    
+    ptree = createBinaryTree()  // Initialize an empty binary tree
+    
+    allCounts = openFile("all_counts.txt", "w")  // Open all_counts.txt for writing
+    
+    if allCounts is NULL then
+        print "Error: Unable to open all_counts.txt"
+        return 1
+    end if
+    
+    for i from 1 to argc - 1 do
+        inputFile = openFile(argv[i], "r")  // Open current input file
+        
+        if inputFile is NULL then
+            print "Error with ", argv[i]
+            continue to next iteration
+        end if
+        
+        while word = readNextWord(inputFile) do
+            addItem(word, ptree)  // Add word to the binary tree
+        end while
+        
+        closeFile(inputFile)  // Close current input file
+    end for
+    
+    printToFile(ptree, allCounts)  // Print words and their counts to all_counts.txt
+    closeFile(allCounts)  // Close all_counts.txt
+    
+    mostCommon = findMax(ptree.root)  // Find node with highest count in the tree
+    leastCommon = findMin(ptree.root)  // Find node with smallest count in the tree
+    
+    if mostCommon is NULL and leastCommon is NULL then
+        print "The tree is empty."
+    else
+        if mostCommon is not NULL then
+            print "The most common word is ", mostCommon.word
+        end if
+        
+        if leastCommon is not NULL then
+            print "The least common word is ", leastCommon.word
+        end if
+    end if
+    
+    deleteTree(ptree)  // Clean up and deallocate memory used by the tree
+    
+    return 0  // Exit the program successfully
+end function
+
+function readNextWord(file)
+    word = read word from file
+    if end of file then
+        return NULL
+    else
+        return word
+    end if
+end function
+
+function openFile(filename, mode)
+    file = open filename with mode
+    return file
+end function
+
+function closeFile(file)
+    close file
+end function
+
+function createBinaryTree()
+    tree = allocate memory for BinaryTree structure
+    tree.root = NULL
+    return tree
+end function
+
+function addItem(word, tree)
+    // Implementation of adding a word to the binary tree
+end function
+
+function printToFile(tree, file)
+    inOrderPrint(tree.root, file)
+end function
+
+function inOrderPrint(root, file)
+    if root is NULL then
+        return
+    end if
+    
+    inOrderPrint(root.left, file)
+    write root.count and root.word to file
+    inOrderPrint(root.right, file)
+end function
+
+function findMax(start)
+    // Implementation of finding the node with the highest count in the tree
+end function
+
+function findMin(start)
+    // Implementation of finding the node with the lowest count in the tree
+end function
+
+function deleteTree(tree)
+    // Implementation of cleaning up and deallocating memory used by the tree
+end function

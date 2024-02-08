@@ -1,0 +1,14 @@
+test_rational.c
+Alessandra Giovenco
+10/11/2023
+
+This program will scan 2 text files and write into a seperate text file the output of each function that is scanned from the 2 inputted text files. The class Rational will use operator
+overloading to perform mathematical operations on rational numbers. 
+
+To compile the program, run the command:
+g++ -g -Wall test_rational.o Rational.o -lm -o rational_math
+
+To run the program, run the command:
+./rational_math input1.txt input2.txt output.txt
+
+Sources: Peter Czepiel proof-read and assisted in fixing errors. 
